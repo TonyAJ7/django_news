@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="content-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9 mb40">
+                <article>
+                    <h3 class="font-weight-bold" style="line-height: 1.5; text-align: center">{{ object.title }}</h3>
+                    <ul class="post-meta list-inline">
+                            <li class="list-inline-item">
+                                <i class="fa fa-calendar-o"></i> <a href="#">{% language 'ru' %}
+                                          {{ news.created | date:"j-F" }} {{ news.created|time:"H:i" }}
+                                        {% endlanguage %}</a>
+                            </li>
+                            <li class="list-inline-item">
+                                <i class="fa fa-tags"></i> <a href="#">{{ object.category }}</a>
+                            </li>
+                            <li class="list-inline-item">
+                                <i class="fa fa-tags"></i> <a href="#">{{ object.tags}}</a>
+                            </li>
+                        </ul>
+                    <img src="{{ object.image.url }}" alt="" class="img-fluid mb30" style="height: 450px; width: 810px; border-radius: 10px">
+                    <div class="middle-side">
+                        <div class="post-content">
+                            <p style="font-size: 18px">{{ object.content|linebreaksbr }}</p>
+                            <hr class="mb40">
+                            <h4 class="mb40 font-weight-bold">Комментарии({{ post_comments_count }})</h4>
+                            <div class="media-list">
+                                {% for comment in post_comments %}
+{#                                    <i class="d-flex mr-3 fa fa-user-circle-o fa-3x"></i>#}
+                                    <div class="media-body">
+                                        <div class="small-1">
+                                            <img src="{{ comment.user.profile.image.url }}"  style="height: 40px" alt="" class="rounded article-img">
+                                            <b>{{ comment.user }}</b>
+                                            <time class="ml-2 small" style="opacity: 0.5">{% language 'ru' %}
+                                                {{ comment.date }}
+                                            {% endlanguage %}</time>
+                                        </div>
+                                        <p>{{ comment.content }}</p>
+                                        <hr>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <h4 class="mb40 font-weight-bold">Добавить комментарий</h4>
+                            <form method="POST">
+                                {% csrf_token %}
+                                <div class="form-group">
+    {#                                <textarea class="form-control" placeholder="Коммент"></textarea>#}
+                                    {{ form }}
+                                </div>
+                                <div class="clearfix float-right">
+                                    <button type='submit' class="btn btn-primary btn-lg" >Оставить коммент</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </article>
+                <!-- post article-->
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

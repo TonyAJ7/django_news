@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+{% block content %}
+    <div class="container" style="padding-top: 50px; padding-bottom: 50px; max-width: 500px">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Войти в аккаунт</legend>
+                {% language 'ru' %}
+                <div>{{ form | crispy }}</div>
+                {% endlanguage %}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Вход</button>
+            </div>
+        </form>
+        <div class="border-top pt-3">
+            <small class="text-muted">
+                Еще не создали аккаунт? <a href="{% url 'register' %}" class="ml-2">Создать</a>
+            </small>
+            <br>
+            <small class="text-muted">
+                Забыли пароль?<a href="{% url 'password_reset' %}" class="ml-2">Сбросить</a>
+            </small>
+        </div>
+    </div>
+{% endblock content %}

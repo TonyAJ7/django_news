@@ -1,0 +1,24 @@
+<div class="flash-news-banner">
+          <div class="container">
+            <div class="d-lg-flex align-items-center justify-content-between">
+              <div class="d-flex align-items-center">
+                <span class="badge badge-danger mr-3">Внимание!</span>
+                <p class="mb-0">
+                 Сайт работает в тестовом режиме. Если в работе сайта наблюдаются сбои, глюки, ошибки, просим сообщить
+                    <a href="https://www.instagram.com/djabbaroov/"><u>админу!</u></a>
+                </p>
+              </div>
+              <div class="d-flex">
+                <span class="today"  id="times" style="display: inline;"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+<script>
+    function clockTick() {
+    const dt = new Date();
+    document.getElementById("times").innerHTML = (("0"+dt.getDate()).slice(-2)) +"."+ (("0"+(dt.getMonth()+1)).slice(-2)) +"."+ (dt.getFullYear()) +" "+ (("0"+dt.getHours()).slice(-2)) +":"+ (("0"+dt.getMinutes()).slice(-2)) +":"+ (("0"+dt.getSeconds()).slice(-2));
+}
+setInterval(clockTick, 1000);
+</script>

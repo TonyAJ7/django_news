@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+{% block content %}
+    <div class="container" style="padding-top: 150px; padding-bottom: 150px; max-width: 500px;">
+        <div class="media">
+            <img class="rounded-circle account-img" style="width: 100px; height: 100px" src="{{ user.profile.image.url }}" alt="none">&ensp;&ensp;
+            <div class="media-body">
+                <h2 class="account-heading" id="user"><ins>{{ user.username }}</ins></h2>
+                <p class="text-secondary">{{ user.email }}</p>
+            </div>
+        </div>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <br>
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Ваш профиль</legend>
+                {% language 'ru' %}
+                {{ u_form | crispy }}
+                {{ p_form | crispy }}
+                {% endlanguage %}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Обновить данные</button>
+            </div>
+        </form>
+    </div>
+{% endblock content %}
